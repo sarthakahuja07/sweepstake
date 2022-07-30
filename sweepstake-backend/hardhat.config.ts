@@ -37,7 +37,12 @@ const config: HardhatUserConfig = {
 		coinmarketcap: process.env.COINMARKETCAP_API_KEY
 	},
 	namedAccounts: {
-		deployer: 0
+		deployer: {
+            default:0
+        },
+        entrant:{
+            default:1
+        }
 	}
 };
 
