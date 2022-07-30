@@ -172,6 +172,10 @@ contract Sweepstake is VRFConsumerBaseV2, KeeperCompatibleInterface {
         _timestamp = s_latestWinnerTimestamp;
     }
 
+    function getInterval() public view returns (uint256 _interval) {
+        _interval = i_interval;
+    }
+
     receive() external payable {}
 
     fallback() external payable {}
