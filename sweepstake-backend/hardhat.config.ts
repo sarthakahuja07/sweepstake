@@ -1,6 +1,11 @@
 import { HardhatUserConfig } from "hardhat/config";
 import "@nomicfoundation/hardhat-toolbox";
 import "hardhat-deploy";
+import "@nomiclabs/hardhat-waffle";
+import "@nomiclabs/hardhat-etherscan";
+import "@nomiclabs/hardhat-ethers";
+import "solidity-coverage";
+import "@nomicfoundation/hardhat-chai-matchers";
 import "hardhat-gas-reporter";
 require("dotenv").config();
 
@@ -38,11 +43,14 @@ const config: HardhatUserConfig = {
 	},
 	namedAccounts: {
 		deployer: {
-            default:0
-        },
-        entrant:{
-            default:1
-        }
+			default: 0
+		},
+		entrant: {
+			default: 1
+		}
+	},
+	mocha: {
+		timeout: 200000 // 200 seconds max for running tests
 	}
 };
 

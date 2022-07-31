@@ -21,12 +21,16 @@ const deploySweepStake: DeployFunction = async (
 	log("🧑 🧑 🧑 🧑 🧑 🧑 🧑 🧑 🧑 🧑 🧑 🧑");
 
 	if (developmentChains.includes(network.name)) {
-		const VRFCoordinatorV2Mock = await deployments.get("VRFCoordinatorV2Mock");
+		const VRFCoordinatorV2Mock = await ethers.getContract(
+			"VRFCoordinatorV2Mock"
+		);
 		vrfCoordinatorV2Address = VRFCoordinatorV2Mock.address;
-		subscriptionId = 1;
+		const transactionResponse = await VRFCoordinatorV2Mock.createSubscription();
+		const transactionReceipt = await transactionResponse.wait();
+		subscriptionId = transactionReceipt.events[0].args.subId;
 		entrancFee = "1000000000000000000"; // 0.1 ETH
 		callbackGasLimit = "500000"; // 500,000 gas
-		interval = "30";
+		interval = networkConfig[network.name]["keepersInterval"];
 		keyHash =
 			"0xd89b2bf150e3b9e13446986e571fb9cab24b13cea0a43ea20a6049a85cc807cc";
 	} else {

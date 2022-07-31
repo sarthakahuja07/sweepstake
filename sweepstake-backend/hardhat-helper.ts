@@ -12,8 +12,12 @@ type networkConfigTypeObject = {
 };
 
 const networkConfig: networkConfigTypeObject = {
-	localhost: {},
-	hardhat: {},
+	localhost: {
+		keepersInterval: "3"
+	},
+	hardhat: {
+		keepersInterval: "3"
+	},
 	rinkeby: {
 		vrfCoordinatorAddress: "0x6168499c0cFfCaCD319c818142124B7A15E857ab",
 		blockConfirmations: 6,

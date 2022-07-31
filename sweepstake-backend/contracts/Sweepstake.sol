@@ -5,7 +5,7 @@ import "@chainlink/contracts/src/v0.8/VRFConsumerBaseV2.sol";
 import "@chainlink/contracts/src/v0.8/interfaces/VRFCoordinatorV2Interface.sol";
 import "@chainlink/contracts/src/v0.8/KeeperCompatible.sol";
 
-error Sweepstake__not_enough_entrance_fee(uint256 _amount);
+error Sweepstake__not_enough_entrance_fee();
 error Sweepstake__state__notOpen();
 error Sweepstake__transactionFailed();
 error SweepStake__upKeepNotNeeded(
@@ -58,7 +58,7 @@ contract Sweepstake is VRFConsumerBaseV2, KeeperCompatibleInterface {
 
     function enterSweepstake() public payable {
         if (msg.value < i_entranceFee) {
-            revert Sweepstake__not_enough_entrance_fee(msg.value);
+            revert Sweepstake__not_enough_entrance_fee();
         }
         if (s_state != SweepStake_state.OPEN) {
             revert Sweepstake__state__notOpen();

@@ -33,10 +33,13 @@ import { SignerWithAddress } from "@nomiclabs/hardhat-ethers/signers";
 				it("intitiallizes the sweepstake correctly", async () => {
 					console.log(network.config.chainId);
 					const state = (await sweepstake.getState()).toString();
+					console.log(state);
+					console.log(networkConfig[network.name].keepersInterval);
+					console.log(interval);
 					assert.equal(state, "0");
 					assert.equal(
 						interval.toString(),
-						networkConfig[network.config.chainId!]["keepersInterval"]
+						networkConfig[network.name].keepersInterval
 					);
 				});
 			});
@@ -65,7 +68,7 @@ import { SignerWithAddress } from "@nomiclabs/hardhat-ethers/signers";
 					await sweepstake.performUpkeep([]);
 					await expect(
 						sweepstake.enterSweepstake({ value: entranceFee })
-					).to.be.revertedWith("Raffle__RaffleNotOpen");
+					).to.be.revertedWith("Sweepstake__state__notOpen");
 				});
 			});
 			describe("checkUpkeep", function () {
@@ -90,7 +93,7 @@ import { SignerWithAddress } from "@nomiclabs/hardhat-ethers/signers";
 				});
 				it("returns false if enough time hasn't passed", async () => {
 					await sweepstake.enterSweepstake({ value: entranceFee });
-					await network.provider.send("evm_increaseTime", [interval - 1]);
+					await network.provider.send("evm_increaseTime", [interval - 2]);
 					await network.provider.request({ method: "evm_mine", params: [] });
 					const { upkeepNeeded } = await sweepstake.callStatic.checkUpkeep(
 						"0x"
@@ -118,7 +121,7 @@ import { SignerWithAddress } from "@nomiclabs/hardhat-ethers/signers";
 				});
 				it("reverts if checkup is false", async () => {
 					await expect(sweepstake.performUpkeep("0x")).to.be.revertedWith(
-						"Raffle__UpkeepNotNeeded"
+						"SweepStake__upKeepNotNeeded"
 					);
 				});
 				it("updates the sweepstake state and emits a requestId", async () => {
@@ -155,7 +158,7 @@ import { SignerWithAddress } from "@nomiclabs/hardhat-ethers/signers";
 
 					// This will be more important for our staging tests...
 					await new Promise<void>(async (resolve, reject) => {
-						sweepstake.once("WinnerPicked", async () => {
+						sweepstake.once("SweepStake__winnerPicked", async () => {
 							console.log("WinnerPicked event fired!");
 
 							try {
@@ -163,18 +166,15 @@ import { SignerWithAddress } from "@nomiclabs/hardhat-ethers/signers";
 								const recentWinner = await sweepstake.getLatestWinner();
 								const state = await sweepstake.getState();
 								const winnerBalance = await accounts[2].getBalance();
-								const endingTimeStamp = await sweepstake.getLatestWinnerTimeStamp();
+								const endingTimeStamp =
+									await sweepstake.getLatestWinnerTimeStamp();
 								await expect(sweepstake.getEntrant(0)).to.be.reverted;
 								assert.equal(recentWinner.toString(), accounts[2].address);
 								assert.equal(state, 0);
 								assert.equal(
 									winnerBalance.toString(),
 									startingBalance
-										.add(
-											entranceFee
-												.mul(additionalEntrances)
-												.add(entranceFee)
-										)
+										.add(entranceFee.mul(additionalEntrances).add(entranceFee))
 										.toString()
 								);
 								assert(endingTimeStamp > startingTimeStamp);
