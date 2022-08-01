@@ -154,6 +154,7 @@ import { SignerWithAddress } from "@nomiclabs/hardhat-ethers/signers";
 						sweepstake = sweepstakeContract.connect(accounts[i]);
 						await sweepstake.enterSweepstake({ value: entranceFee });
 					}
+                    
 					const startingTimeStamp = await sweepstake.getLatestWinnerTimeStamp();
 
 					// This will be more important for our staging tests...
