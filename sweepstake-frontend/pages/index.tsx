@@ -17,6 +17,10 @@ const Home: NextPage = () => {
 
 			<div>
 				<p className="text-slate-200">Hello </p>
+				<div className="grid grid-cols-3">
+					<div className="col-span-2">hello</div>
+					<div className="">hi</div>
+				</div>
 			</div>
 		</div>
 	);

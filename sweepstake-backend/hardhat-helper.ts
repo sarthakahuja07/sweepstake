@@ -40,5 +40,7 @@ const networkConfig: networkConfigTypeObject = {
 	}
 };
 const developmentChains = ["hardhat", "localhost"];
+const frontEndContractsFile = "../sweepstake-frontend/constants/contractAddresses.json"
+const frontEndAbiFile = "../sweepstake-frontend/constants/abi.json"
 
-export { networkConfig, developmentChains };
+export { networkConfig, developmentChains,frontEndContractsFile,frontEndAbiFile };
