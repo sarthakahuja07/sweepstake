@@ -17,15 +17,6 @@ const updateUI: DeployFunction = async function (
 	);
 	contractAddresses[network.config.chainId!] = [sweepstake.address];
 
-	// if (chainId in contractAddresses) {
-	// 	if (
-	// 		!contractAddresses[network.config.chainId!].includes(sweepstake.address)
-	// 	) {
-	// 		contractAddresses[network.config.chainId!].push(sweepstake.address);
-	// 	}
-	// } else {
-	// 	contractAddresses[network.config.chainId!] = [sweepstake.address];
-	// }
 	fs.writeFileSync(frontEndContractsFile, JSON.stringify(contractAddresses));
 
 	const dir = path.resolve(
