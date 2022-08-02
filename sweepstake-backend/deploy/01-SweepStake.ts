@@ -51,6 +51,8 @@ const deploySweepStake: DeployFunction = async (
 		interval
 	];
 
+    
+
 	const sweepStake = await deploy("Sweepstake", {
 		from: deployer,
 		log: true,
