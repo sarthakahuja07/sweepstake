@@ -1,15 +1,18 @@
+import { ConnectButton } from "@rainbow-me/rainbowkit";
+
 const Navbar = () => {
 	return (
 		<>
 			<div className="container mx-auto py-8">
-				<div className="grid grid-cols-12">
-					<div className="col-span-4">
+				<div className="flex min-w-full justify-between">
+					<div className=" px-2">
 						<h1 className="uppercase text-4xl font-extrabold">
 							Sweepstake
 						</h1>
 					</div>
-					<div className="col-span-6"></div>
-					<div className="col-span-2">Connect</div>
+					<div className="px-2 ">
+						<ConnectButton label="Connect" />
+					</div>
 				</div>
 			</div>
 		</>

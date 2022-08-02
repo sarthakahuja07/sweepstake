@@ -1,6 +1,7 @@
 import type { NextPage } from "next";
 import Head from "next/head";
 import Image from "next/image";
+import Content from "../components/Content";
 import styles from "../styles/Home.module.css";
 
 const Home: NextPage = () => {
@@ -14,14 +15,7 @@ const Home: NextPage = () => {
 				/>
 				<link rel="icon" href="/favicon.ico" />
 			</Head>
-
-			<div>
-				<p className="text-slate-200">Hello </p>
-				<div className="grid grid-cols-3">
-					<div className="col-span-2">hello</div>
-					<div className="">hi</div>
-				</div>
-			</div>
+			<Content />
 		</div>
 	);
 };
