@@ -25,7 +25,7 @@ const networkConfig: networkConfigTypeObject = {
 		keyHash:
 			"0xd89b2bf150e3b9e13446986e571fb9cab24b13cea0a43ea20a6049a85cc807cc",
 		keepersInterval: "3",
-		entranceFee: "100000000000000000", // 0.1 ETH
+		entranceFee: "50000000000000000", // 0.1 ETH
 		callbackGasLimit: "500000" // 500,000 gas
 	},
 	mumbai: {
@@ -35,7 +35,7 @@ const networkConfig: networkConfigTypeObject = {
 		keyHash:
 			"0x4b09e658ed251bcafeebbc69400383d49f344ace09b9576fe248bb02c003fe9f",
 		keepersInterval: "3",
-		entranceFee: "100000000000000000", // 0.1 ETH
+		entranceFee: "50000000000000000",
 		callbackGasLimit: "500000" // 500,000 gas
 	}
 };

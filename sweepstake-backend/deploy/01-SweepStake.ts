@@ -28,7 +28,7 @@ const deploySweepStake: DeployFunction = async (
 		const transactionResponse = await VRFCoordinatorV2Mock.createSubscription();
 		const transactionReceipt = await transactionResponse.wait();
 		subscriptionId = transactionReceipt.events[0].args.subId;
-		entrancFee = "1000000000000000000"; // 0.1 ETH
+		entrancFee = "500000000000000000";
 		callbackGasLimit = "500000"; // 500,000 gas
 		interval = networkConfig[network.name]["keepersInterval"];
 		keyHash =
@@ -51,7 +51,7 @@ const deploySweepStake: DeployFunction = async (
 		interval
 	];
 
-    
+
 
 	const sweepStake = await deploy("Sweepstake", {
 		from: deployer,
