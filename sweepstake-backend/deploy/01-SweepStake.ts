@@ -61,6 +61,7 @@ const deploySweepStake: DeployFunction = async (
 	});
 
 	log("🧑 🧑 🧑 🧑 🧑 🧑 🧑 🧑 🧑 🧑 🧑 🧑 DEPLOYED");
+	log("🧑 🧑 🧑 🧑 🧑 🧑 🧑 🧑 🧑 🧑 🧑 🧑 DEPLOYED");
 
 	if (
 		!developmentChains.includes(network.name) &&
