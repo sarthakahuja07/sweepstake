@@ -11,7 +11,7 @@ const Navbar = () => {
 						</h1>
 					</div>
 					<div className="px-2 ">
-						<ConnectButton label="Connect" />
+						<ConnectButton label="Connect Wallet" />
 					</div>
 				</div>
 			</div>
